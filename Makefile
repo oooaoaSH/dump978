@@ -20,7 +20,7 @@ dump978-fa: dump978_main.o socket_output.o message_dispatch.o fec.o libs/fec/ini
 faup978: faup978_main.o socket_input.o uat_message.o track.o faup978_reporter.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@ $(LIBS)
 
-skyaware978: skyaware978_main.o socket_input.o uat_message.o track.o skyaware_writer.o
+skyaware978: skyaware978_main.o socket_input.o uat_message.o track.o skyaware_writer.o stats_writer.o
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@ $(LIBS)
 
 format:

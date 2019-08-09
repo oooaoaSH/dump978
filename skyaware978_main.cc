@@ -13,9 +13,11 @@
 #include "skyaware_writer.h"
 #include "socket_input.h"
 #include "uat_message.h"
+#include "stats_writer.h"
 
 using namespace flightaware::uat;
 using namespace flightaware::skyaware;
+using namespace flightaware::stats;
 
 namespace po = boost::program_options;
 using boost::asio::ip::tcp;
@@ -110,8 +112,10 @@ static int realmain(int argc, char **argv) {
 
     auto dir = opts["json-dir"].as<std::string>();
     auto writer = SkyAwareWriter::Create(io_service, tracker, dir, std::chrono::milliseconds(1000), opts["history-count"].as<unsigned>(), std::chrono::milliseconds(opts["history-interval"].as<unsigned>() * 1000), location);
+    auto stats_writer = StatsWriter::Create(io_service, tracker, dir, std::chrono::milliseconds(1000));
 
     writer->Start();
+    stats_writer->Start();
     tracker->Start();
     input->Start();
 
@@ -119,7 +123,9 @@ static int realmain(int argc, char **argv) {
 
     input->Stop();
     tracker->Stop();
+    stats_writer->Stop();
     writer->Stop();
+
 
     return 1; // connection loss is abnormal
 }
