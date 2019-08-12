@@ -112,7 +112,7 @@ static int realmain(int argc, char **argv) {
 
     auto dir = opts["json-dir"].as<std::string>();
     auto writer = SkyAwareWriter::Create(io_service, tracker, dir, std::chrono::milliseconds(1000), opts["history-count"].as<unsigned>(), std::chrono::milliseconds(opts["history-interval"].as<unsigned>() * 1000), location);
-    auto stats_writer = StatsWriter::Create(io_service, tracker, dir, std::chrono::milliseconds(1000));
+    auto stats_writer = StatsWriter::Create(io_service, tracker, dir, std::chrono::milliseconds(10000));
 
     writer->Start();
     stats_writer->Start();

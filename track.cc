@@ -160,5 +160,10 @@ void Tracker::HandleMessage(const AdsbMessage &message) {
     }
 
     aircraft_[key].UpdateFromMessage(message);
+
+    if (message.rssi < peak_signal_) {
+        peak_signal_ = message.rssi;
+    }
+
     ++total_messages_;
 }
