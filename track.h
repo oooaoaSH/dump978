@@ -154,6 +154,7 @@ namespace flightaware::uat {
         const MapType &Aircraft() const { return aircraft_; }
         std::uint32_t TotalMessages() const { return total_messages_; }
         std::uint32_t UniqueAircraft() const { return aircraft_.size(); }
+        std::uint32_t SingleMessageAircraft() const { return single_message_aircraft_; }
         double PeakSignal() const { return peak_signal_; }
         void PurgeOld();
 
@@ -168,6 +169,7 @@ namespace flightaware::uat {
         std::chrono::milliseconds timeout_;
         MapType aircraft_;
         std::uint32_t total_messages_ = 0;
+        std::uint32_t single_message_aircraft_ = 0;
         double peak_signal_ = 0;
     };
 }; // namespace flightaware::uat

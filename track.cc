@@ -115,6 +115,9 @@ void Tracker::PurgeOld() {
 
     for (auto i = aircraft_.begin(); i != aircraft_.end();) {
         if (i->second.last_message_time < expires_timestamp) {
+            if (i->second.messages == 1) {
+                single_message_aircraft_++;
+            }
             i = aircraft_.erase(i);
         } else {
             ++i;

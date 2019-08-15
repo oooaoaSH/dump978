@@ -39,6 +39,7 @@ void StatsWriter::UpdateStats() {
     stats_json["messages"] = tracker_->TotalMessages();
     stats_json["unique_aircraft"] = tracker_->UniqueAircraft();
     stats_json["peak_signal"] = tracker_->PeakSignal();
+    stats_json["single_message_aircraft"] = tracker_->SingleMessageAircraft();
 
     std::ofstream stats_file((dir_ / "stats.json").native());
     stats_file << stats_json << std::endl;
