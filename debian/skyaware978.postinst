@@ -27,16 +27,8 @@ case "$1" in
             adduser --system --home /usr/share/$NAME --no-create-home --quiet "$RUNAS"
         fi
 
-	if dpkg --compare-versions "$2" lt "3.7.2"
+	if dpkg --compare-versions "$2" lt "3.7.2~"
 	then
-		echo "Removing skyview conffile" >&2
-	        # postinst rm_conffile either keeps conffile for reference if any changes were made, or remove the conffile if not
-		if dpkg-maintscript-helper supports rm_conffile 2>/dev/null
-		then
-			echo "rm_confile..." >&2
-			dpkg-maintscript-helper rm_conffile /etc/lighttpd/conf-enabled/89-skyview978.conf 3.7.1 -- "$@"
-		fi
-
 		lighty-disable-mod skyview978 || true
 	fi
 
